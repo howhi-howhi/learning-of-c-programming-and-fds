@@ -1,17 +1,19 @@
+//根据中序遍历和后序遍历，建立一棵树，并按照“之”字形，对每一层进行遍历
 #include <stdio.h>
 #include <stdlib.h>
 struct binary_tree
 {
     int data;
     struct binary_tree *left;
-    binary_tree *right;
+    struct binary_tree *right;
 };
 typedef binary_tree *Tree;
 Tree createtree(int inorder[], int postorder[], int in_start, int in_end, int po_start, int po_end)
+//根据中序遍历和后序遍历，可以唯一确定一棵树
 {
     if (in_start > in_end || po_start > po_end)
-        return NULL;
-    int rootvalue = postorder[po_end];
+        return NULL;//确保不越界
+    int rootvalue = postorder[po_end];//后序遍历，父节点的值放在end 选择end 开始建立
     Tree root = (Tree)malloc(sizeof(struct binary_tree));
     root->data = rootvalue;
     root->left = root->right = NULL;
@@ -20,7 +22,7 @@ Tree createtree(int inorder[], int postorder[], int in_start, int in_end, int po
     {
         if (inorder[i] == rootvalue)
         {
-            index = i;
+            index = i;//查找当前节点Value在inorder中的位置，方便递归
             break;
         }
     }
