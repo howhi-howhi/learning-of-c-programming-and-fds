@@ -25,11 +25,12 @@ Tree createtree(int inorder[], int postorder[], int in_start, int in_end, int po
             index = i;//查找当前节点Value在inorder中的位置，方便递归
             break;
         }
-    }
-    int left_length = index - in_start;
-    root->left = createtree(inorder, postorder, in_start, index - 1, po_start, po_start + left_length - 1);
+    }//根据中序遍历，index为分界线，index-1及其左侧是左子树，index+1及其右侧是右子树
+    int left_length = index - in_start;//用于计算postorder中的下标范围。
+    root->left = createtree(inorder, postorder, in_start, index - 1, po_start, po_start + left_length - 1);//注意后序遍历的方式，左--右--中 
+    //po_start--po_start+left_length-1  是左子树的范围   po_start+left_length---po_end-1 是右子树范围
     root->right = createtree(inorder, postorder, index + 1, in_end, po_start + left_length, po_end - 1);
-    return root;
+    return root;//返回当前节点
 }
 void zigzag(Tree root, int n)
 {
