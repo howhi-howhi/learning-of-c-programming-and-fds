@@ -36,9 +36,9 @@ void zigzag(Tree root, int n)
 {
     if (!root)
         return;
-    Tree queue[n];
+    Tree queue[n];//使用队列，实现遍历
     int front = 0, rear = 0;
-    queue[rear++] = root;
+    queue[rear++] = root;//当前节点入队
     int x = 1, first = 1;
     while (front < rear)
     {
@@ -46,12 +46,12 @@ void zigzag(Tree root, int n)
         int level[n];
         for (int i = 0; i < level_size; i++)
         {
-            Tree node = queue[front++];
-            level[i] = node->data;
+            Tree node = queue[front++];//临时保存当前队首节点，同时front加1
+            level[i] = node->data;//当前节点数值写入level数组
             if (node->left)
-                queue[rear++] = node->left;
+                queue[rear++] = node->left;//左子节点先入队
             if (node->right)
-                queue[rear++] = node->right;
+                queue[rear++] = node->right;//右子节点后入队
         }
         if (x)
         {
