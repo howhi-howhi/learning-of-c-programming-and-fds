@@ -52,7 +52,15 @@ void zigzag(Tree root, int n)
                 queue[rear++] = node->left;//左子节点先入队
             if (node->right)
                 queue[rear++] = node->right;//右子节点后入队
-        }
+        }//重点考虑队列如何实现BFS层序遍历的？
+        //
+      // level_size 表示当前这一层需要处理的节点数量
+// 此时队列中可能已经包含下一层节点，但不会影响本轮处理
+// front 指向当前处理节点的位置（出队）
+// rear 指向队列尾部（新节点入队的位置）
+// 在本轮循环中，只处理 level_size 个节点，确保只遍历当前层
+// 在处理当前层节点时，将其左右子节点依次加入队列尾部，形成下一层
+// 子节点入队顺序为：先左后右，从而保证遍历顺序的稳定性
         if (x)
         {
             for (int i = level_size - 1; i >= 0; i--)
