@@ -43,7 +43,7 @@ void zigzag(Tree root, int n)
     while (front < rear)
     {
         int level_size = rear - front;
-        int level[n];
+        int level[n];//存入level的，是当前这一层的节点。
         for (int i = 0; i < level_size; i++)
         {
             Tree node = queue[front++];//临时保存当前队首节点，同时front加1
@@ -59,7 +59,7 @@ void zigzag(Tree root, int n)
             {
                 if (!first)
                     printf(" ");
-                printf("%d", level[i]);
+                printf("%d", level[i]);//x=1时，按从右到左输出
                 first = 0;
             }
         }
@@ -69,11 +69,11 @@ void zigzag(Tree root, int n)
             {
                 if (!first)
                     printf(" ");
-                printf("%d", level[i]);
+                printf("%d", level[i]);//x=0时，从左到右输出
                 first = 0;
             }
         }
-        x=1-x;
+        x=1-x;//每次打印完当前层的节点之后，更新打印的顺序
     }
 }
 int main()
